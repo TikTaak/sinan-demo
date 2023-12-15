@@ -2,6 +2,7 @@ import os
 import threading
 
 from src.bot.bot import bot, admins
+from src.main import Main
 
 def bot_polling():
     admins.send_message("polling   /start")
@@ -9,13 +10,16 @@ def bot_polling():
     # bot.infinity_polling()
     bot.polling()
     
-def run_main_script():
+def run_main():
     """
     this function run main script
     using env python interpreter.
     """
-    os.system("cd env/Scripts/ && activate && cd ../.. && cd src/ && python main.py")
-    
+    # os.system("cd env/Scripts/ && activate && cd ../.. && cd src/ && python main.py")
+    main = Main()
+    Main.main()
+
 if __name__=="__main__":
     threading.Thread(target=bot_polling).start()
-    run_main_script()
+    threading.Thread(target=run_main).start()
+    

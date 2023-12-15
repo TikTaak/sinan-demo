@@ -1,34 +1,60 @@
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-import os
-import requests
-import instaloader
+# import os
+# import requests
+# import instaloader
 
-from bot.bot import bot, admins
+# from .bot.bot import bot, admins
+from .instagram import Instagram
+import time
 
-load_dotenv()
-ig = instaloader.Instaloader()
-print("load env data")
-INSTAGRAM_USERNAME = os.getenv('INSTAGRAM_USERNAME')
-INSTAGRAM_PASSWORD = os.getenv('INSTAGRAM_PASSWORD')
+class Main(object):
+    def main():
+        instagram = Instagram()
+        print("main")
+        while True:
+            print(instagram.fetch_data_mediaid("lyrics.editz0"))
+            time.sleep(1)
 
-admins.send_message("login to instagram...")
-try:
-    ig.login(INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD)
-    admins.send_message("login successful")
-except Exception:
-    admins.send_message(f"login failed with exception: {Exception}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# load_dotenv()
+# ig = instaloader.Instaloader()
+# print("load env data")
+# INSTAGRAM_USERNAME = os.getenv('INSTAGRAM_USERNAME')
+# INSTAGRAM_PASSWORD = os.getenv('INSTAGRAM_PASSWORD')
+
+# admins.send_message("login to instagram...")
+# try:
+#     ig.login(INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD)
+#     admins.send_message("login successful")
+# except Exception:
+#     admins.send_message(f"login failed with exception: {Exception}")
     
 # ig.download_profile("cristiano", profile_pic_only=True)
 
 
-print("loading profile...")
-profile = instaloader.Profile.from_username(ig.context, 'lyrics.editz0')
-admins.send_message("main.py")
-print("Done.")
+# print("loading profile...")
+# profile = instaloader.Profile.from_username(ig.context, 'lyrics.editz0')
+# admins.send_message("main.py")
+# print("Done.")
+# result = [post.mediaid for post in profile.get_posts()]
+# print(result)
 
-result = [post.mediaid for post in profile.get_posts()]
-print(result)
+
 # for post in profile.get_posts():
 #     print(post.url)
     # caption = post.caption

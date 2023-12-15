@@ -4,27 +4,30 @@ import os
 import requests
 import instaloader
 
+from bot.bot import bot, admins
+
 load_dotenv()
 ig = instaloader.Instaloader()
 print("load env data")
 INSTAGRAM_USERNAME = os.getenv('INSTAGRAM_USERNAME')
 INSTAGRAM_PASSWORD = os.getenv('INSTAGRAM_PASSWORD')
 
-print("login to instagram...")
+admins.send_message("login to instagram...")
 try:
     ig.login(INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD)
-    print("login successful")
+    admins.send_message("login successful")
 except Exception:
-    print("login failed with exception: ", Exception)
+    admins.send_message(f"login failed with exception: {Exception}")
     
 # ig.download_profile("cristiano", profile_pic_only=True)
 
 
 print("loading profile...")
 profile = instaloader.Profile.from_username(ig.context, 'lyrics.editz0')
+admins.send_message("main.py")
 print("Done.")
 
-result = [post.url for post in profile.get_posts()]
+result = [post.mediaid for post in profile.get_posts()]
 print(result)
 # for post in profile.get_posts():
 #     print(post.url)

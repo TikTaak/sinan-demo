@@ -6,7 +6,6 @@ import instaloader
 
 from .bot.bot import admins
 
-
 class Instagram(object):
     ig = None
     is_login = False
@@ -25,8 +24,11 @@ class Instagram(object):
         except Exception:
             admins.send_message(f"login failed with exception: {Exception}")
             
-    def fetch_data_mediaid(self, user):
+    def fetch_data(self, user):
         if self.is_login:
             self.user = user
             profile = instaloader.Profile.from_username(self.ig.context, user)
-            return [post.mediaid for post in profile.get_posts()]
+            return {
+                "mediaid":[post.mediaid for post in profile.get_posts()],
+                "caption":[post.caption for post in profile.get_posts()],
+            }

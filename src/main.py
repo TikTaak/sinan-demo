@@ -6,14 +6,22 @@
 
 # from .bot.bot import bot, admins
 from .instagram import Instagram
+from .database import Database
 import time
+import config
 
 class Main(object):
     def main():
         instagram = Instagram()
-        print("main")
+        database = Database()
+
         while True:
-            print(instagram.fetch_data_mediaid("lyrics.editz0"))
+            posts = instagram.fetch_data(config.TARGET_INSTAGRAM_USERNAME)
+            ids = posts['mediaid']
+            caption = posts['caption']
+            for _ in range(len(ids)):
+                database.add_post(ids[_], caption[_])
+                
             time.sleep(1)
 
 
